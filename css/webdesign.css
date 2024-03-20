@@ -1,0 +1,9 @@
+html {
+    text-family: sans-serif;
+    text-align: justify;
+    font-size: 12px;
+}
+
+label {
+    font-weight: 500;
+}

@@ -1,0 +1,134 @@
+<!DOCTYPE HTML>
+<html>
+
+    <head>
+        <title>CAGBALETE ISLAND BOOKING FORM</title>
+    <meta charset = "UTF-8">
+    <meta name = "description" content = "Booking Form">
+    <meta name = "keywords" content = "Booking, Online, Cagbalete">
+    <meta name = "author" content = "SLSU CIT CAPSTONE">
+    <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+        
+    <link rel="stylesheet" href="css/webdesign.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    </head>
+
+            <body>
+
+                <div class="container">
+                    <div class="row">
+
+                        <h4>CAGBALETE ISLAND TOURIST REGISTRATION FORM
+                        </h4>
+
+                        <div class="col-12">
+
+                        <p>Mabuhay! This online registration is the first step of seamless registration. 
+                            Before accomplishing this form, be sure that you have already booked an accommodation in Cagbalete Island, parking area (if any), and boat transfer.
+                            Kindly complete this form and present the confirmation to the front desk at the Mauban Tourist Port before paying the environmental and tourism administrative fee (ETAF)
+                            and proceeding to the next step.
+                        </p>
+
+                        </div>
+
+                        <!-- Make into Modal
+                        <form name="consent" action="#" novalidate>
+                            <h5>I have read the Data Privacy Statement and express my consent for the Municipal Tourism Office of Mauban to collect, record, organize, update or modify, retrieve, consult, use, consolidate, block, erase or destruct my personal data as part of my information. 
+                                <br><br>
+                                I hereby affirm my right to be informed, object to processing, access and rectify, suspend or withdraw my personal data, and be indemnified in case of damages pursuant to the provisions of the Republic Act No. 10173 of the Philippines, Data Privacy Act of 2012 
+                                and its corresponding Implementing Rules and Regulations.
+                            </h5>
+    
+                                <input type = "radio" name="consent" required>YES</input>
+                                <br>
+                                <input type = "radio" name="consent" required>NO</input>
+                                <br> <br>
+                        </form> -->
+                    </div>
+                            <form name="RegForm" action="#" novalidate>
+                    <div class="row">
+                        <h5>Tourist Information</h5>
+                            <div class ="form-floating col">
+                                <input type = "email" name = "email" id="temail" class="form-control" placeholder = "example@email.com" required />
+                                <label for="temail">&nbsp;&nbsp; Email Address</label>
+                                <span id="temailfail"></span>
+                            </div>
+                            <div class ="form-floating col">
+                               <input type = "text" name = "fullname" id="tfname" class="form-control" placeholder = "John F. Doe" required />
+                                <label for="tfname">&nbsp;&nbsp; Full Name</label>
+                                <span id="tfnamefail"></span>
+                            </div>
+                            <div class ="form-floating col">
+                                <input type = "text" name = "contactno" id="tcontact" class="form-control" placeholder = "0991256384" required />
+                                <label for="tcontact">&nbsp;&nbsp; Contact No.</label>
+                                <span id="tcontactfail"></span>
+                            </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <h5>Region</h5>
+                        <div class ="form-floating col">
+                            <select name = "country" id="tcountry" class="form-control" required > 
+                                <option value="Philippines">Philippines</option>
+                                <option value="International">International</option>
+                            </select>
+                            <label for="tcountry">&nbsp;&nbsp; Country of Residence</label>
+                        </div>
+                        <div class ="form-floating col" id = "optorigin">
+                            <input type = "text" name = "origin" id="torigin" class="form-control" required/>
+                            <label for="tcountry">&nbsp;&nbsp; Country of Origin</label>
+                        </div>
+                        <div class ="form-floating col" id = "optregion">
+                            <select name = "region" id="tregion" class="form-control" required> 
+                                <option value="Region I - Ilocos Region">Region I - Ilocos Region</option>
+                                <option value="Region II - Cagayan Valley">Region II - Cagayan Valley</option>
+                                <option value="Region III - Central Luzon">Region III - Central Luzon</option>
+                                <option value="CALABARZON Region">CALABARZON Region</option>
+                                <option value="MIMAROPA Region">MIMAROPA Region</option>
+                                <option value="Region V -  Bicol Region">Region V -  Bicol Region</option>
+                                <option value="Region VI - Western Visayas">Region VI - Western Visayas</option>
+                                <option value="Region VII - Central Visayas">Region VII - Central Visayas</option>
+                                <option value="Region VIII - Eastern Visayas">Region VIII - Eastern Visayas</option>
+                                <option value="Region IX -  Zamboanga Peninsula">Region IX -  Zamboanga Peninsula</option>
+                                <option value="Region X - Northern Mindanao">Region X - Northern Mindanao</option>
+                                <option value="Region XI -  Davao Region">Region XI -  Davao Region</option>
+                                <option value="Region XII -  SOCCSKSARGEN">Region XII -  SOCCSKSARGEN</option>
+                                <option value="Region XIII - Caraga">Region XIII - Caraga</option>
+                                <option value="NCR - National Capital Region">NCR - National Capital Region</option>
+                                <option value="CAR - Cordillera Administrative Region">CAR - Cordillera Administrative Region</option>
+                                <option value="BARMM-Bangsamoro Autonomous Region in Muslim Mindanao">BARMM-Bangsamoro Autonomous Region in Muslim Mindanao</option>
+                            </select>
+                            <label for="tregion">&nbsp;&nbsp; Region</label>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <h5>Type of Visitors</h5>
+                        <div class ="form-floating col">
+                            <input type = "email" name = "email" id="temail" class="form-control" placeholder = "example@email.com" required />
+                            <label for="temail">&nbsp;&nbsp; Email Address</label>
+                            <span id="temailfail"></span>
+                        </div>
+                    </div>
+                            <br>
+                            <input type ="submit" class="btn-success" />
+                            </form>
+                </div>
+
+            </body>
+            
+                <script type="text/javascript">  
+                
+                const form = document.querySelector("form")
+
+                    form.addEventListener('submit', e => {
+                        if (!form.checkValidity()) {
+                            e.preventDefault()
+                        }
+            
+                        form.classList.add('was-validated')
+                    })
+
+                </script>
+               
+</html>
