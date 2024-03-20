@@ -74,9 +74,10 @@
                             </select>
                             <label for="tcountry">&nbsp;&nbsp; Country of Residence</label>
                         </div>
-                        <div class ="form-floating col" id = "optorigin">
-                            <input type = "text" name = "origin" id="torigin" class="form-control" required/>
-                            <label for="tcountry">&nbsp;&nbsp; Country of Origin</label>
+                        <div class ="form-floating col" id="optorigin">
+                            <input type = "text" name = "origin" id="torigin" class="form-control" placeholder = "USA" required />
+                            <label for="torigin">&nbsp;&nbsp; Country of Origin</label>
+                            <span id="toriginfail"></span>
                         </div>
                         <div class ="form-floating col" id = "optregion">
                             <select name = "region" id="tregion" class="form-control" required> 
@@ -105,9 +106,158 @@
                     <div class="row">
                         <h5>Type of Visitors</h5>
                         <div class ="form-floating col">
-                            <input type = "email" name = "email" id="temail" class="form-control" placeholder = "example@email.com" required />
-                            <label for="temail">&nbsp;&nbsp; Email Address</label>
-                            <span id="temailfail"></span>
+                            <input type = "number" name = "foreignc" id="tforeignc" class="form-control" placeholder = "1" required />
+                            <label for="tforeignc">&nbsp;&nbsp; # of Foreigners</label>
+                            <span id="tforeigncfail"></span>
+                        </div>
+                        <div class ="form-floating col">
+                            <input type = "number" name = "filipinoc" id="tfilipinoc" class="form-control" placeholder = "1" required />
+                            <label for="tfilipinoc">&nbsp;&nbsp; # of Filipinos</label>
+                            <span id="tfilipinocfail"></span>
+                        </div>
+                        <div class ="form-floating col">
+                            <input type = "number" name = "maubaninc" id="tmaubaninc" class="form-control" placeholder = "1" required />
+                            <label for="tmaubaninc">&nbsp;&nbsp; # of Maubanins</label>
+                            <span id="tmaubanincfail"></span>
+                        </div>
+                        <div class ="form-floating col">
+                            <input type = "number" name = "visitorc" id="tvisitorc" class="form-control" placeholder = "1" required />
+                            <label for="tvisitorc">&nbsp;&nbsp; Total # of Visitors</label>
+                            <span id="tvisitorcfail"></span>
+                        </div>
+                        <div class ="form-floating col">
+                            <input type = "number" name = "malec" id="tmalec" class="form-control" placeholder = "1" required />
+                            <label for="tmalec">&nbsp;&nbsp; Total # of Male</label>
+                            <span id="tmalecfail"></span>
+                        </div>
+                        <div class ="form-floating col">
+                            <input type = "number" name = "femalec" id="tfemalec" class="form-control" placeholder = "1" required />
+                            <label for="tfemalec">&nbsp;&nbsp; Total # of Female</label>
+                            <span id="tfemalecfail"></span>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <h5>Age Segregation</h5>
+                        <div class ="form-floating col">
+                            <input type = "number" name = "specialc" id="tspecialc" class="form-control" placeholder = "1" required />
+                            <label for="tspecialc">&nbsp;&nbsp; Total # of Senior Citizen, PWD, Below 7y/o </label>
+                            <span id="tspecialcfail"></span>
+                        </div>
+                        <div class ="form-floating col">
+                            <input type = "number" name = "sevenyoc" id="tsevenyoc" class="form-control" placeholder = "1" required />
+                            <label for="tsevenyoc">&nbsp;&nbsp; Total # of 0 - 7 y/o</label>
+                            <span id="tsevenyocfail"></span>
+                        </div>
+                        <div class ="form-floating col">
+                            <input type = "number" name = "fifnineyoc" id="tfifnineyoc" class="form-control" placeholder = "1" required />
+                            <label for="tfifnineyoc">&nbsp;&nbsp; Total # of 13 - 59 y/o</label>
+                            <span id="tfifnineyocfail"></span>
+                        </div>
+                        <div class ="form-floating col">
+                            <input type = "number" name = "sixtyyoc" id="tsixtyyoc" class="form-control" placeholder = "1" required />
+                            <label for="tsixtyyoc">&nbsp;&nbsp; Total # of 60 y/o and above</label>
+                            <span id="tsixtyyocfail"></span>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <h5>Travel Preference</h5>
+                        <div class ="form-floating col">
+                            <input type = "date" name = "traveldate" id="tdate" class="form-control" required/>
+                            <label for="tdate">&nbsp;&nbsp; Arrival Date</label>
+                            <span id = "tdatefail"></span>
+                        </div>
+                        <div class ="form-floating col">
+                            <select name = "itinerary" id="titinerary" class="form-control" required> 
+                                <option value="Day Tour">Day Tour</option>
+                                <option value="Overnight">Overnight</option>
+                                <option value="2 Nights">2 Nights</option>
+                                <option value="3 Nights">3 Nights</option>
+                                <option value="4 Nights">4 Nights</option>
+                                <option value="5 Nights">5 Nights and above</option>
+                            </select>
+                            <label for="titinerary">&nbsp;&nbsp; Travel Itinerary</label>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <h5>Resort Accommodation</h5>
+                        <p>Registered Resorts as of February 12, 2024</p>
+                        <div class ="form-floating col">
+                            <select name = "resort" id="tresort" class="form-control" required>
+                                <option value ="Aquazul Hotel and Resort (09237428368/092347826015)">Aquazul Hotel and Resort (09237428368/092347826015)</option>
+                                <option value ="Dona Choleng Camping Resort (09108823346/ 09266549958)">Dona Choleng Camping Resort (09108823346/ 09266549958)</option>
+                                <option value="Rio del Sol Beach Resort (09776932453)">Rio del Sol Beach Resort (09776932453)</option>
+                                <option value="Jovencio's Resort (09564135204)">Jovencio's Resort (09564135204)</option>
+                                <option value="MVT Sto. Niño Beach Resort (09176787080)">MVT Sto. Niño Beach Resort (09176787080)</option>
+                                <option value="Nilandingan Cove Resort (09151443094)">Nilandingan Cove Resort (09151443094)</option>
+                                <option value="Villa Cleofas (Cagbalete Island Camping Resort) 09178143475">Villa Cleofas (Cagbalete Island Camping Resort) 09178143475</option>
+                                <option value="Villa Escaparde Camping and Beach Resor (09073700888)">Villa Escaparde Camping and Beach Resor (09073700888)</option>
+                                <option value="Villa Noe Beach Resort (09065197126/09126914340)">Villa Noe Beach Resort (09065197126/09126914340)</option>
+                                <option value="Villa Pilarosa Beach Resort (09496608865/09959376995)">Villa Pilarosa Beach Resort (09496608865/09959376995)</option>
+                                <option value="Tita Pinay Beach Resort (09108070864)">Tita Pinay Beach Resort (09108070864)</option>"
+                                <option value="Aguho Playa Beach Resort (09670061937)">Aguho Playa Beach Resort (09670061937)</option>"
+                                <option value="Tent Place (09988845443 / 09100956370)">Tent Place (09988845443 / 09100956370)</option>"
+                                <option value="Orlan Beach Resort (09707100945)">Orlan Beach Resort (09707100945)</option>"
+                                <option value="Other">Other</option>
+                            </select>
+                            <label for="tresort">&nbsp;&nbsp; Resort Accommodation</label>
+                        </div>
+                        <div class ="form-floating col" id = "optresort">
+                            <input type ="text" name ="oresort" id="toresort" class="form-control" placeholder="Magic Resort" required />
+                            <label for="toresort">&nbsp;&nbsp; Other Resort</label>
+                            <span id="toresortfail"></span>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <h5>Means of Travel</h5>
+                        <div class ="form-floating col">
+                            <select name = "travelmeans" id="tmeans" class="form-control" required>
+                                <option value ="Private Vehicle">Private Vehicle</option>
+                                <option value ="Public Utility Vehicle">Public Utility Vehicle</option>
+                            </select>
+                            <label for="tmeans">&nbsp;&nbsp; Means of Travel to Mauban</label>
+                        </div>
+                        <div class ="form-floating col">
+                            <select name = "parking" id="tparking" class="form-control" required>
+                                <option value ="La Riche Parking Space">La Riche Parking Space</option>
+                                <option value="Don's Parking Rental ( 09171581808)">Don's Parking Rental ( 09171581808)</option>
+                                <option value="Metro Park Cagbalete Island Parking Space (09460335938/09109141363)">Metro Park Cagbalete Island Parking Space (09460335938/09109141363)</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <label for="tparking">&nbsp;&nbsp; Parking Space</label>
+                        </div>
+                        <div class ="form-floating col" id = "optparking">
+                            <input type ="text" name ="oparking" id="toparking" class="form-control" placeholder="Magic parking" required />
+                            <label for="toparking">&nbsp;&nbsp; Other Parking</label>
+                            <span id="toparkingfail"></span>
+                        </div>
+                        <div class ="form-floating col">
+                            <select name = "boat" id="tboat" class="form-control" required>
+                                <option value ="Public Boat (P100/ride/head) Sabang Port Only">Public Boat (P100/ride/head) Sabang Port Only</option>
+                                <option value ="Private Boat (Rates depend on the capacity)">Private Boat (Rates depend on the capacity)</option>
+                                <option value="Boat Provided by Resort (As confirmed by both guests and resort)">Boat Provided by Resort (As confirmed by both guests and resort)</option>
+                            </select>
+                            <label for="tboat">&nbsp;&nbsp; Boat Classification</label>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <h5>Purpose of Visit to Mauban</h5>
+                        <div class ="form-floating col">
+                            <select name = "purpose" id="tpurpose" class="form-control" required>
+                                <option value ="Leisure">Leisure</option>
+                                <option value ="Business">Business</option>
+                                <option value ="Other">Other</option>
+                            </select>
+                            <label for="tpurpose">&nbsp;&nbsp; Purpose of Visit</label>
+                        </div>
+                        <div class ="form-floating col" id = "optpurpose">
+                            <input type ="text" name ="opurpose" id="topurpose" class="form-control" placeholder="Magic purpose" required />
+                            <label for="topurpose">&nbsp;&nbsp; Other Purpose</label>
+                            <span id="topurposefail"></span>
                         </div>
                     </div>
                             <br>
