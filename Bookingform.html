@@ -68,9 +68,10 @@
                     <div class="row">
                         <h5>Region</h5>
                         <div class ="form-floating col">
-                            <select name = "country" id="tcountry" class="form-control" required  > 
+                            <select name = "country" id="tcountry" class="form-control" required onclick="countrycheck()" > 
+                                <option value="" disabled selected>Select Residence</option>
                                 <option value="Philippines">Philippines</option>
-                                <option value="International" id ="inational">International</option>
+                                <option value="International">International</option>
                             </select>
                             <label for="tcountry">&nbsp;&nbsp; Country of Residence</label>
                         </div>
@@ -81,6 +82,7 @@
                         </div>
                         <div class ="form-floating col" id = "optregion">
                             <select name = "region" id="tregion" class="form-control" required> 
+                                <option value="" disabled selected>Select a Region</option>
                                 <option value="Region I - Ilocos Region">Region I - Ilocos Region</option>
                                 <option value="Region II - Cagayan Valley">Region II - Cagayan Valley</option>
                                 <option value="Region III - Central Luzon">Region III - Central Luzon</option>
@@ -164,12 +166,13 @@
                     <div class="row">
                         <h5>Travel Preference</h5>
                         <div class ="form-floating col">
-                            <input type = "date" name = "traveldate" id="tdate" class="form-control" required/>
+                            <input type = "date" name = "traveldate" id="tdate" class="form-control" min = "<?php echo date('Y-m-d') ?>" required/>
                             <label for="tdate">&nbsp;&nbsp; Arrival Date</label>
                             <span id = "tdatefail"></span>
                         </div>
                         <div class ="form-floating col">
                             <select name = "itinerary" id="titinerary" class="form-control" required> 
+                                <option value="" disabled selected>Select an Itinerary</option>
                                 <option value="Day Tour">Day Tour</option>
                                 <option value="Overnight">Overnight</option>
                                 <option value="2 Nights">2 Nights</option>
@@ -186,6 +189,7 @@
                         <p>Registered Resorts as of February 12, 2024</p>
                         <div class ="form-floating col">
                             <select name = "resort" id="tresort" class="form-control" required>
+                                <option value="" disabled selected>Select a Resort Accommodation</option>
                                 <option value ="Aquazul Hotel and Resort (09237428368/092347826015)">Aquazul Hotel and Resort (09237428368/092347826015)</option>
                                 <option value ="Dona Choleng Camping Resort (09108823346/ 09266549958)">Dona Choleng Camping Resort (09108823346/ 09266549958)</option>
                                 <option value="Rio del Sol Beach Resort (09776932453)">Rio del Sol Beach Resort (09776932453)</option>
@@ -215,6 +219,7 @@
                         <h5>Means of Travel</h5>
                         <div class ="form-floating col">
                             <select name = "travelmeans" id="tmeans" class="form-control" required>
+                                <option value="" disabled selected>Select Means of Travel</option>
                                 <option value ="Private Vehicle">Private Vehicle</option>
                                 <option value ="Public Utility Vehicle">Public Utility Vehicle</option>
                             </select>
@@ -222,6 +227,7 @@
                         </div>
                         <div class ="form-floating col">
                             <select name = "parking" id="tparking" class="form-control" required>
+                                <option value="" disabled selected>Select a Parking Option</option>
                                 <option value ="La Riche Parking Space">La Riche Parking Space</option>
                                 <option value="Don's Parking Rental ( 09171581808)">Don's Parking Rental ( 09171581808)</option>
                                 <option value="Metro Park Cagbalete Island Parking Space (09460335938/09109141363)">Metro Park Cagbalete Island Parking Space (09460335938/09109141363)</option>
@@ -236,6 +242,7 @@
                         </div>
                         <div class ="form-floating col">
                             <select name = "boat" id="tboat" class="form-control" required>
+                                <option value="" disabled selected>Select a Boating Option</option>
                                 <option value ="Public Boat (P100/ride/head) Sabang Port Only">Public Boat (P100/ride/head) Sabang Port Only</option>
                                 <option value ="Private Boat (Rates depend on the capacity)">Private Boat (Rates depend on the capacity)</option>
                                 <option value="Boat Provided by Resort (As confirmed by both guests and resort)">Boat Provided by Resort (As confirmed by both guests and resort)</option>
@@ -248,6 +255,7 @@
                         <h5>Purpose of Visit to Mauban</h5>
                         <div class ="form-floating col-6">
                             <select name = "purpose" id="tpurpose" class="form-control" required>
+                                <option value="" disabled selected>Select a Purpose</option>
                                 <option value ="Leisure">Leisure</option>
                                 <option value ="Business">Business</option>
                                 <option value ="Other">Other</option>
@@ -274,12 +282,17 @@
                 var parkingopt = document.getElementById('optparking');
                 var purposeopt = document.getElementById('optpurpose');
                 var originopt = document.getElementById('optorigin');
-                const countryselect = document.getElementById('tcountry');
-
-                countryselect.addEventListener("click", countrycheck());
+                
                 function countrycheck () {
+                    var countryselect = document.getElementById('tcountry').value;
+                    if (countryslect == "International") {
                     originopt.style.display = "display: block;";
                     originopt.value = "";
+                    } 
+                    else {
+                    originopt.style.display = "display: none;";
+                    originopt.value = "N/A";
+                    }
                 }
             
 
