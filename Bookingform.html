@@ -68,14 +68,14 @@
                     <div class="row">
                         <h5>Region</h5>
                         <div class ="form-floating col">
-                            <select name = "country" id="tcountry" class="form-control" required > 
+                            <select name = "country" id="tcountry" class="form-control" required  > 
                                 <option value="Philippines">Philippines</option>
-                                <option value="International">International</option>
+                                <option value="International" id ="inational">International</option>
                             </select>
                             <label for="tcountry">&nbsp;&nbsp; Country of Residence</label>
                         </div>
-                        <div class ="form-floating col" id="optorigin">
-                            <input type = "text" name = "origin" id="torigin" class="form-control" placeholder = "USA" required />
+                        <div class ="form-floating col" id="optorigin" style="display: none;">
+                            <input type = "text" name = "origin" id="torigin" class="form-control" placeholder = "USA" required value = "N/A" />
                             <label for="torigin">&nbsp;&nbsp; Country of Origin</label>
                             <span id="toriginfail"></span>
                         </div>
@@ -204,8 +204,8 @@
                             </select>
                             <label for="tresort">&nbsp;&nbsp; Resort Accommodation</label>
                         </div>
-                        <div class ="form-floating col" id = "optresort">
-                            <input type ="text" name ="oresort" id="toresort" class="form-control" placeholder="Magic Resort" required />
+                        <div class ="form-floating col" id = "optresort" style="display: none;">
+                            <input type ="text" name ="oresort" id="toresort" class="form-control" placeholder="Magic Resort" required value ="N/A" />
                             <label for="toresort">&nbsp;&nbsp; Other Resort</label>
                             <span id="toresortfail"></span>
                         </div>
@@ -229,8 +229,8 @@
                             </select>
                             <label for="tparking">&nbsp;&nbsp; Parking Space</label>
                         </div>
-                        <div class ="form-floating col" id = "optparking">
-                            <input type ="text" name ="oparking" id="toparking" class="form-control" placeholder="Magic parking" required />
+                        <div class ="form-floating col" id = "optparking" style="display: none;">
+                            <input type ="text" name ="oparking" id="toparking" class="form-control" placeholder="Magic parking" required value = "N/A" />
                             <label for="toparking">&nbsp;&nbsp; Other Parking</label>
                             <span id="toparkingfail"></span>
                         </div>
@@ -246,7 +246,7 @@
                     <br>
                     <div class="row">
                         <h5>Purpose of Visit to Mauban</h5>
-                        <div class ="form-floating col">
+                        <div class ="form-floating col-6">
                             <select name = "purpose" id="tpurpose" class="form-control" required>
                                 <option value ="Leisure">Leisure</option>
                                 <option value ="Business">Business</option>
@@ -254,8 +254,8 @@
                             </select>
                             <label for="tpurpose">&nbsp;&nbsp; Purpose of Visit</label>
                         </div>
-                        <div class ="form-floating col" id = "optpurpose">
-                            <input type ="text" name ="opurpose" id="topurpose" class="form-control" placeholder="Magic purpose" required />
+                        <div class ="form-floating col" id = "optpurpose" style="display: none;">
+                            <input type ="text" name ="opurpose" id="topurpose" class="form-control" placeholder="Magic purpose" required value = "N/A" />
                             <label for="topurpose">&nbsp;&nbsp; Other Purpose</label>
                             <span id="topurposefail"></span>
                         </div>
@@ -267,8 +267,27 @@
 
             </body>
             
-                <script type="text/javascript">  
+                <script type="text/javascript">
+            
+                var resortopt = document.getElementById('optresort');
+                var parkingopt = document.getElementById('optparking');
+                var purposeopt = document.getElementById('optpurpose');
+                var originopt = document.getElementById('optorigin');
+                const countryselect = document.getElementById('tcountry');
+
                 
+                function countrycheck () {
+                if (document.getElementById('inational').selected == "True") {
+                    originopt.style.display = "display: block;";
+                    originopt.value = "";
+                }
+                else {
+                    originopt.style.display = "display: none;";
+                    originopt.value = "N/A";
+                }
+            }
+            countryselect.addEventListener("click", countrycheck());
+
                 const form = document.querySelector("form")
 
                     form.addEventListener('submit', e => {
