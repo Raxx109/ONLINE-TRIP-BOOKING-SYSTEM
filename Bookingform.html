@@ -2,18 +2,40 @@
 <html>
 
     <head>
+        
         <title>CAGBALETE ISLAND BOOKING FORM</title>
     <meta charset = "UTF-8">
     <meta name = "description" content = "Booking Form">
     <meta name = "keywords" content = "Booking, Online, Cagbalete">
     <meta name = "author" content = "SLSU CIT CAPSTONE">
     <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
-        
-    <link rel="stylesheet" href="css/webdesign.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/webdesign.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
     </head>
-
             <body>
+                
+                <div class ="modal fade" id = "consentm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="Consent Modal" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="consenttitle">Data Collection Consent Form</h1>
+                            </div>
+                            <div class="modal-body">     
+                    
+                    <h5>I have read the Data Privacy Statement and express my consent for the Municipal Tourism Office of Mauban to collect, record, organize, update or modify, retrieve, consult, use, consolidate, block, erase or destruct my personal data as part of my information. 
+                        <br><br>
+                        I hereby affirm my right to be informed, object to processing, access and rectify, suspend or withdraw my personal data, and be indemnified in case of damages pursuant to the provisions of the Republic Act No. 10173 of the Philippines, Data Privacy Act of 2012 
+                        and its corresponding Implementing Rules and Regulations.
+                    </h5>
+                            </div> 
+                            <div class="modal-footer">
+                                <button type="button" class="btn-success" data-bs-dismiss="modal" aria-label="YES">YES</button>
+                                <button type="button" class="btn-danger" onclick="disagree()" style="margin-right: 200px;">NO</button>
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
 
                 <div class="container">
                     <div class="row">
@@ -30,22 +52,9 @@
                         </p>
 
                         </div>
-
-                        <!-- Make into Modal
-                        <form name="consent" action="#" novalidate>
-                            <h5>I have read the Data Privacy Statement and express my consent for the Municipal Tourism Office of Mauban to collect, record, organize, update or modify, retrieve, consult, use, consolidate, block, erase or destruct my personal data as part of my information. 
-                                <br><br>
-                                I hereby affirm my right to be informed, object to processing, access and rectify, suspend or withdraw my personal data, and be indemnified in case of damages pursuant to the provisions of the Republic Act No. 10173 of the Philippines, Data Privacy Act of 2012 
-                                and its corresponding Implementing Rules and Regulations.
-                            </h5>
-    
-                                <input type = "radio" name="consent" required>YES</input>
-                                <br>
-                                <input type = "radio" name="consent" required>NO</input>
-                                <br> <br>
-                        </form> -->
+                        
                     </div>
-                            <form name="RegForm" action="#" novalidate>
+                            <form name="RegForm" id="Rform" action="#" novalidate>
                     <div class="row">
                         <h5>Tourist Information</h5>
                             <div class ="form-floating col">
@@ -68,16 +77,16 @@
                     <div class="row">
                         <h5>Region</h5>
                         <div class ="form-floating col">
-                            <select name = "country" id="tcountry" class="form-control" required onclick="countrycheck()" > 
-                                <option value="" disabled selected>Select Residence</option>
+                            <select name = "country" id="tcountry" class="form-control" required onchange="countrycheck()" > 
+                                <option value="" disabled selected>Select Country of Residence</option>
                                 <option value="Philippines">Philippines</option>
                                 <option value="International">International</option>
                             </select>
                             <label for="tcountry">&nbsp;&nbsp; Country of Residence</label>
                         </div>
                         <div class ="form-floating col" id="optorigin" style="display: none;">
-                            <input type = "text" name = "origin" id="torigin" class="form-control" placeholder = "USA" required value = "N/A" />
-                            <label for="torigin">&nbsp;&nbsp; Country of Origin</label>
+                            <input type = "text" name = "origin" id="torigin" class="form-control" placeholder = "USA" required />
+                            <label for="torigin">&nbsp;&nbsp; Enter Country</label>
                             <span id="toriginfail"></span>
                         </div>
                         <div class ="form-floating col" id = "optregion">
@@ -108,32 +117,32 @@
                     <div class="row">
                         <h5>Type of Visitors</h5>
                         <div class ="form-floating col">
-                            <input type = "number" name = "foreignc" id="tforeignc" class="form-control" placeholder = "1" required />
+                            <input type = "number" name = "foreignc" min="0" id="tforeignc" class="form-control" placeholder = "123456789" required />
                             <label for="tforeignc">&nbsp;&nbsp; # of Foreigners</label>
                             <span id="tforeigncfail"></span>
                         </div>
                         <div class ="form-floating col">
-                            <input type = "number" name = "filipinoc" id="tfilipinoc" class="form-control" placeholder = "1" required />
+                            <input type = "number" name = "filipinoc" min="0" id="tfilipinoc" class="form-control" placeholder = "123456789" required />
                             <label for="tfilipinoc">&nbsp;&nbsp; # of Filipinos</label>
                             <span id="tfilipinocfail"></span>
                         </div>
                         <div class ="form-floating col">
-                            <input type = "number" name = "maubaninc" id="tmaubaninc" class="form-control" placeholder = "1" required />
+                            <input type = "number" name = "maubaninc" min="0" id="tmaubaninc" class="form-control" placeholder = "123456789" required />
                             <label for="tmaubaninc">&nbsp;&nbsp; # of Maubanins</label>
                             <span id="tmaubanincfail"></span>
                         </div>
                         <div class ="form-floating col">
-                            <input type = "number" name = "visitorc" id="tvisitorc" class="form-control" placeholder = "1" required />
+                            <input type = "number" name = "visitorc" min="0" id="tvisitorc" class="form-control" placeholder = "123456789" required />
                             <label for="tvisitorc">&nbsp;&nbsp; Total # of Visitors</label>
                             <span id="tvisitorcfail"></span>
                         </div>
                         <div class ="form-floating col">
-                            <input type = "number" name = "malec" id="tmalec" class="form-control" placeholder = "1" required />
+                            <input type = "number" name = "malec" min="0" id="tmalec" class="form-control" placeholder = "123456789" required />
                             <label for="tmalec">&nbsp;&nbsp; Total # of Male</label>
                             <span id="tmalecfail"></span>
                         </div>
                         <div class ="form-floating col">
-                            <input type = "number" name = "femalec" id="tfemalec" class="form-control" placeholder = "1" required />
+                            <input type = "number" name = "femalec" min="0" id="tfemalec" class="form-control" placeholder = "123456789" required />
                             <label for="tfemalec">&nbsp;&nbsp; Total # of Female</label>
                             <span id="tfemalecfail"></span>
                         </div>
@@ -142,22 +151,22 @@
                     <div class="row">
                         <h5>Age Segregation</h5>
                         <div class ="form-floating col">
-                            <input type = "number" name = "specialc" id="tspecialc" class="form-control" placeholder = "1" required />
+                            <input type = "number" min="0" name = "specialc" id="tspecialc" class="form-control" placeholder = "123456789" required />
                             <label for="tspecialc">&nbsp;&nbsp; Total # of Senior Citizen, PWD, Below 7y/o </label>
                             <span id="tspecialcfail"></span>
                         </div>
                         <div class ="form-floating col">
-                            <input type = "number" name = "sevenyoc" id="tsevenyoc" class="form-control" placeholder = "1" required />
+                            <input type = "number" name = "sevenyoc" min="0" id="tsevenyoc" class="form-control" placeholder = "123456789" required />
                             <label for="tsevenyoc">&nbsp;&nbsp; Total # of 0 - 7 y/o</label>
                             <span id="tsevenyocfail"></span>
                         </div>
                         <div class ="form-floating col">
-                            <input type = "number" name = "fifnineyoc" id="tfifnineyoc" class="form-control" placeholder = "1" required />
+                            <input type = "number" name = "fifnineyoc" min="0" id="tfifnineyoc" class="form-control" placeholder = "123456789" required />
                             <label for="tfifnineyoc">&nbsp;&nbsp; Total # of 13 - 59 y/o</label>
                             <span id="tfifnineyocfail"></span>
                         </div>
                         <div class ="form-floating col">
-                            <input type = "number" name = "sixtyyoc" id="tsixtyyoc" class="form-control" placeholder = "1" required />
+                            <input type = "number" name = "sixtyyoc" min="0" id="tsixtyyoc" class="form-control" placeholder = "123456789" required />
                             <label for="tsixtyyoc">&nbsp;&nbsp; Total # of 60 y/o and above</label>
                             <span id="tsixtyyocfail"></span>
                         </div>
@@ -188,7 +197,7 @@
                         <h5>Resort Accommodation</h5>
                         <p>Registered Resorts as of February 12, 2024</p>
                         <div class ="form-floating col">
-                            <select name = "resort" id="tresort" class="form-control" required>
+                            <select name = "resort" id="tresort" class="form-control" onchange = "resortcheck()" required>
                                 <option value="" disabled selected>Select a Resort Accommodation</option>
                                 <option value ="Aquazul Hotel and Resort (09237428368/092347826015)">Aquazul Hotel and Resort (09237428368/092347826015)</option>
                                 <option value ="Dona Choleng Camping Resort (09108823346/ 09266549958)">Dona Choleng Camping Resort (09108823346/ 09266549958)</option>
@@ -209,8 +218,8 @@
                             <label for="tresort">&nbsp;&nbsp; Resort Accommodation</label>
                         </div>
                         <div class ="form-floating col" id = "optresort" style="display: none;">
-                            <input type ="text" name ="oresort" id="toresort" class="form-control" placeholder="Magic Resort" required value ="N/A" />
-                            <label for="toresort">&nbsp;&nbsp; Other Resort</label>
+                            <input type ="text" name ="oresort" id="toresort" class="form-control" placeholder="Magic Resort" required />
+                            <label for="toresort">&nbsp;&nbsp; Enter Resort</label>
                             <span id="toresortfail"></span>
                         </div>
                     </div>
@@ -226,18 +235,18 @@
                             <label for="tmeans">&nbsp;&nbsp; Means of Travel to Mauban</label>
                         </div>
                         <div class ="form-floating col">
-                            <select name = "parking" id="tparking" class="form-control" required>
+                            <select name = "parking" id="tparking" class="form-control" onchange = "parkingcheck()" required>
                                 <option value="" disabled selected>Select a Parking Option</option>
                                 <option value ="La Riche Parking Space">La Riche Parking Space</option>
-                                <option value="Don's Parking Rental ( 09171581808)">Don's Parking Rental ( 09171581808)</option>
+                                <option value="Don's Parking Rental (09171581808)">Don's Parking Rental ( 09171581808)</option>
                                 <option value="Metro Park Cagbalete Island Parking Space (09460335938/09109141363)">Metro Park Cagbalete Island Parking Space (09460335938/09109141363)</option>
                                 <option value="Other">Other</option>
                             </select>
                             <label for="tparking">&nbsp;&nbsp; Parking Space</label>
                         </div>
                         <div class ="form-floating col" id = "optparking" style="display: none;">
-                            <input type ="text" name ="oparking" id="toparking" class="form-control" placeholder="Magic parking" required value = "N/A" />
-                            <label for="toparking">&nbsp;&nbsp; Other Parking</label>
+                            <input type ="text" name ="oparking" id="toparking" class="form-control" placeholder="Magic parking" required />
+                            <label for="toparking">&nbsp;&nbsp; Enter Parking Option</label>
                             <span id="toparkingfail"></span>
                         </div>
                         <div class ="form-floating col">
@@ -254,7 +263,7 @@
                     <div class="row">
                         <h5>Purpose of Visit to Mauban</h5>
                         <div class ="form-floating col-6">
-                            <select name = "purpose" id="tpurpose" class="form-control" required>
+                            <select name = "purpose" id="tpurpose" class="form-control" onchange = "purposecheck()" required>
                                 <option value="" disabled selected>Select a Purpose</option>
                                 <option value ="Leisure">Leisure</option>
                                 <option value ="Business">Business</option>
@@ -263,8 +272,8 @@
                             <label for="tpurpose">&nbsp;&nbsp; Purpose of Visit</label>
                         </div>
                         <div class ="form-floating col" id = "optpurpose" style="display: none;">
-                            <input type ="text" name ="opurpose" id="topurpose" class="form-control" placeholder="Magic purpose" required value = "N/A" />
-                            <label for="topurpose">&nbsp;&nbsp; Other Purpose</label>
+                            <input type ="text" name ="opurpose" id="topurpose" class="form-control" placeholder="Magic purpose" required />
+                            <label for="topurpose">&nbsp;&nbsp; Enter Purpose</label>
                             <span id="topurposefail"></span>
                         </div>
                     </div>
@@ -272,30 +281,91 @@
                             <input type ="submit" class="btn-success" />
                             </form>
                 </div>
-
-            </body>
-                <script src ="js/validation.js" type="text/javascript" />
-                <script src ="js/jquery.js" type="text/javascript" />
-                <script type="text/javascript">
-            
-                var resortopt = document.getElementById('optresort');
-                var parkingopt = document.getElementById('optparking');
-                var purposeopt = document.getElementById('optpurpose');
-                var originopt = document.getElementById('optorigin');
                 
-                function countrycheck () {
-                    var countryselect = document.getElementById('tcountry').value;
-                    if (countryslect == "International") {
-                    originopt.style.display = "display: block;";
-                    originopt.value = "";
-                    } 
-                    else {
-                    originopt.style.display = "display: none;";
-                    originopt.value = "N/A";
-                    }
-                }
+                <script src="js/bootstrap.js"></script>      
+                <script src="js/jquery.min.js"></script> 
+            </body>
+           
+            <script>
             
+            const form = document.querySelector('form');
+    
+            form.addEventListener('submit', e => {
+            if (!form.checkValidity()) {
+            e.preventDefault()
+            }
 
-                </script>
-               
+
+            form.classList.add('was-validated');
+            })
+
+            var regionopt = document.getElementById("optregion");
+            var resortopt = document.getElementById("optresort");
+            var parkingopt = document.getElementById("optparking");
+            var purposeopt = document.getElementById("optpurpose");
+            var originopt = document.getElementById("optorigin");
+            
+            function disagree() {
+                window.location.href="index.html";
+            }
+
+            function countrycheck() {
+                var countryselect = document.getElementById("tcountry").value;
+                if (countryselect == "International") {
+                originopt.value="";
+                originopt.style.display = "block"; 
+                regionopt.style.display = "none";
+                } else if (countryselect == "Philippines"){
+                originopt.value = "N/A";
+                originopt.style.display = "none";
+                regionopt.style.display = "block";
+                }
+            }
+    
+            function resortcheck() {
+                var resortselect = document.getElementById("tresort").value;
+                if (resortselect == "Other") {
+                resortopt.style.display = "block"; 
+                resortopt.value= "";    
+                } 
+    
+                else {
+                resortopt.style.display = "none";
+                resortopt.value = "N/A";
+                }
+            }
+    
+            function parkingcheck() {
+                var parkselect = document.getElementById("tparking").value;
+    
+                if (parkselect == "Other") {
+                parkingopt.style.display = "block"; 
+                parkingopt.value = "";    
+                } 
+    
+                else {
+                parkingopt.style.display = "none";
+                parkingopt.value = "N/A";
+                }
+            }
+    
+            function purposecheck() {
+                var purposeselect = document.getElementById("tpurpose").value;
+                if (purposeselect == "Other") {
+                purposeopt.style.display = "block"; 
+                purposeopt.value = "";    
+                } 
+    
+                else {
+                purposeopt.style.display = "none";
+                purposeopt.value = "N/A";
+                }
+            }
+
+            $(document).ready(function() {
+                $('#consentm').modal('show');
+            });
+             
+            </script>
+         
 </html>
