@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="en">
 
     <head>
         
@@ -9,8 +9,8 @@
     <meta name = "keywords" content = "Booking, Online, Cagbalete">
     <meta name = "author" content = "SLSU CIT CAPSTONE">
     <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/webdesign.css">
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/webdesign.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
     </head>
             <body>
                 
@@ -54,7 +54,7 @@
                         </div>
                         
                     </div>
-                            <form name="RegForm" id="Rform" action="#" novalidate>
+                            <form name="RegForm" id="Rform" action="404.html" novalidate>
                     <div class="row">
                         <h5>Tourist Information</h5>
                             <div class ="form-floating col">
@@ -63,12 +63,12 @@
                                 <span id="temailfail"></span>
                             </div>
                             <div class ="form-floating col">
-                               <input type = "text" name = "fullname" id="tfname" class="form-control" placeholder = "John F. Doe" required />
+                               <input type = "text" name = "fullname" id="tfname" class="form-control" placeholder = "John Doe" pattern="([A-zÀ-ž\s]){2,} ([A-zÀ-ž\s]){2,}" required />
                                 <label for="tfname">&nbsp;&nbsp; Full Name</label>
                                 <span id="tfnamefail"></span>
                             </div>
                             <div class ="form-floating col">
-                                <input type = "tel" name = "contactno" id="tcontact" class="form-control" placeholder = "09912563847" pattern="[0-9]{11}" required />
+                                <input type = "tel" name = "contactno" id="tcontact" class="form-control" placeholder = "09912563847" pattern="[09]{2}[0-9]{9}" required />
                                 <label for="tcontact">&nbsp;&nbsp; Contact No.</label>
                                 <span id="tcontactfail"></span>
                             </div>
@@ -77,7 +77,7 @@
                     <div class="row">
                         <h5>Region</h5>
                         <div class ="form-floating col">
-                            <select name = "country" id="tcountry" class="form-control" required onchange="countrycheck()" > 
+                            <select name = "country" id="tcountry" class="form-control" onchange = "countrycheck()" required> 
                                 <option value="" disabled selected>Select Country of Residence</option>
                                 <option value="Philippines">Philippines</option>
                                 <option value="International">International</option>
@@ -85,7 +85,7 @@
                             <label for="tcountry">&nbsp;&nbsp; Country of Residence</label>
                         </div>
                         <div class ="form-floating col" id="optorigin" style="display: none;">
-                            <input type = "text" name = "origin" id="torigin" class="form-control" placeholder = "USA" required />
+                            <input type = "text" name = "origin" id="torigin" class="form-control" placeholder = "USA" pattern="([A-z0-9À-ž\s]){3,}" required />
                             <label for="torigin">&nbsp;&nbsp; Enter Country</label>
                             <span id="toriginfail"></span>
                         </div>
@@ -109,63 +109,64 @@
                                 <option value="NCR - National Capital Region">NCR - National Capital Region</option>
                                 <option value="CAR - Cordillera Administrative Region">CAR - Cordillera Administrative Region</option>
                                 <option value="BARMM-Bangsamoro Autonomous Region in Muslim Mindanao">BARMM-Bangsamoro Autonomous Region in Muslim Mindanao</option>
+                                <option value="NONE" disabled hidden>NONE</option>
                             </select>
                             <label for="tregion">&nbsp;&nbsp; Region</label>
                         </div>
                     </div>
                     <br>
-                    <div class="row">
+                    <div class="row gy-2">
                         <h5>Type of Visitors</h5>
-                        <div class ="form-floating col">
+                        <div class ="form-floating col-sm-2 col-4 ">
                             <input type = "number" name = "foreignc" min="0" id="tforeignc" class="form-control" placeholder = "123456789" required />
                             <label for="tforeignc">&nbsp;&nbsp; # of Foreigners</label>
                             <span id="tforeigncfail"></span>
                         </div>
-                        <div class ="form-floating col">
+                        <div class ="form-floating col-sm-2 col-4 ">
                             <input type = "number" name = "filipinoc" min="0" id="tfilipinoc" class="form-control" placeholder = "123456789" required />
                             <label for="tfilipinoc">&nbsp;&nbsp; # of Filipinos</label>
                             <span id="tfilipinocfail"></span>
                         </div>
-                        <div class ="form-floating col">
+                        <div class ="form-floating col-sm-2 col-4 ">
                             <input type = "number" name = "maubaninc" min="0" id="tmaubaninc" class="form-control" placeholder = "123456789" required />
                             <label for="tmaubaninc">&nbsp;&nbsp; # of Maubanins</label>
                             <span id="tmaubanincfail"></span>
                         </div>
-                        <div class ="form-floating col">
+                        <div class ="form-floating col-sm-2 col-4 ">
                             <input type = "number" name = "visitorc" min="0" id="tvisitorc" class="form-control" placeholder = "123456789" required />
                             <label for="tvisitorc">&nbsp;&nbsp; Total # of Visitors</label>
                             <span id="tvisitorcfail"></span>
                         </div>
-                        <div class ="form-floating col">
+                        <div class ="form-floating col-sm-2 col-4 ">
                             <input type = "number" name = "malec" min="0" id="tmalec" class="form-control" placeholder = "123456789" required />
                             <label for="tmalec">&nbsp;&nbsp; Total # of Male</label>
                             <span id="tmalecfail"></span>
                         </div>
-                        <div class ="form-floating col">
+                        <div class ="form-floating col-sm-2 col-4 ">
                             <input type = "number" name = "femalec" min="0" id="tfemalec" class="form-control" placeholder = "123456789" required />
                             <label for="tfemalec">&nbsp;&nbsp; Total # of Female</label>
                             <span id="tfemalecfail"></span>
                         </div>
                     </div>
                     <br>
-                    <div class="row">
+                    <div class="row gy-2">
                         <h5>Age Segregation</h5>
-                        <div class ="form-floating col">
+                        <div class ="form-floating col-sm-3 col-6">
                             <input type = "number" min="0" name = "specialc" id="tspecialc" class="form-control" placeholder = "123456789" required />
-                            <label for="tspecialc">&nbsp;&nbsp; Total # of Senior Citizen, PWD, Below 7y/o </label>
+                            <label for="tspecialc">&nbsp;&nbsp; Total # of Senior, PWD, Below 7y/o </label>
                             <span id="tspecialcfail"></span>
                         </div>
-                        <div class ="form-floating col">
+                        <div class ="form-floating col-sm-3 col-6">
                             <input type = "number" name = "sevenyoc" min="0" id="tsevenyoc" class="form-control" placeholder = "123456789" required />
                             <label for="tsevenyoc">&nbsp;&nbsp; Total # of 0 - 7 y/o</label>
                             <span id="tsevenyocfail"></span>
                         </div>
-                        <div class ="form-floating col">
+                        <div class ="form-floating col-sm-3 col-6">
                             <input type = "number" name = "fifnineyoc" min="0" id="tfifnineyoc" class="form-control" placeholder = "123456789" required />
                             <label for="tfifnineyoc">&nbsp;&nbsp; Total # of 13 - 59 y/o</label>
                             <span id="tfifnineyocfail"></span>
                         </div>
-                        <div class ="form-floating col">
+                        <div class ="form-floating col-sm-3 col-6">
                             <input type = "number" name = "sixtyyoc" min="0" id="tsixtyyoc" class="form-control" placeholder = "123456789" required />
                             <label for="tsixtyyoc">&nbsp;&nbsp; Total # of 60 y/o and above</label>
                             <span id="tsixtyyocfail"></span>
@@ -218,7 +219,7 @@
                             <label for="tresort">&nbsp;&nbsp; Resort Accommodation</label>
                         </div>
                         <div class ="form-floating col" id = "optresort" style="display: none;">
-                            <input type ="text" name ="oresort" id="toresort" class="form-control" placeholder="Magic Resort" required />
+                            <input type ="text" name ="oresort" id="toresort" class="form-control" placeholder="Magic Resort" pattern="([A-z0-9À-ž\s]){4,}" required />
                             <label for="toresort">&nbsp;&nbsp; Enter Resort</label>
                             <span id="toresortfail"></span>
                         </div>
@@ -232,7 +233,7 @@
                                 <option value ="Private Vehicle">Private Vehicle</option>
                                 <option value ="Public Utility Vehicle">Public Utility Vehicle</option>
                             </select>
-                            <label for="tmeans">&nbsp;&nbsp; Means of Travel to Mauban</label>
+                            <label for="tmeans">&nbsp;&nbsp; Means of Travel</label>
                         </div>
                         <div class ="form-floating col">
                             <select name = "parking" id="tparking" class="form-control" onchange = "parkingcheck()" required>
@@ -245,8 +246,8 @@
                             <label for="tparking">&nbsp;&nbsp; Parking Space</label>
                         </div>
                         <div class ="form-floating col" id = "optparking" style="display: none;">
-                            <input type ="text" name ="oparking" id="toparking" class="form-control" placeholder="Magic parking" required />
-                            <label for="toparking">&nbsp;&nbsp; Enter Parking Option</label>
+                            <input type ="text" name ="oparking" id="toparking" class="form-control" placeholder="Magic parking" pattern="([A-z0-9À-ž\s]){4,}" required />
+                            <label for="toparking">&nbsp;&nbsp; Parking Option</label>
                             <span id="toparkingfail"></span>
                         </div>
                         <div class ="form-floating col">
@@ -272,7 +273,7 @@
                             <label for="tpurpose">&nbsp;&nbsp; Purpose of Visit</label>
                         </div>
                         <div class ="form-floating col" id = "optpurpose" style="display: none;">
-                            <input type ="text" name ="opurpose" id="topurpose" class="form-control" placeholder="Magic purpose" required />
+                            <input type ="text" name ="opurpose" id="topurpose" class="form-control" placeholder="Magic purpose" pattern="([A-z0-9À-ž\s]){4,}" required />
                             <label for="topurpose">&nbsp;&nbsp; Enter Purpose</label>
                             <span id="topurposefail"></span>
                         </div>
@@ -282,12 +283,18 @@
                             </form>
                 </div>
                 
-                <script src="js/bootstrap.js"></script>      
-                <script src="js/jquery.min.js"></script> 
+                <script src="/js/bootstrap.js"></script>      
+                <script src="/js/jquery.min.js"></script> 
             </body>
            
             <script>
-            
+
+                //show consent modal
+             $(document).ready(function() {
+                //$('#consentm').modal('show');
+            });
+
+                //basic form validation
             const form = document.querySelector('form');
     
             form.addEventListener('submit', e => {
@@ -299,12 +306,19 @@
             form.classList.add('was-validated');
             })
 
+                //Element Id Variables
             var regionopt = document.getElementById("optregion");
             var resortopt = document.getElementById("optresort");
             var parkingopt = document.getElementById("optparking");
             var purposeopt = document.getElementById("optpurpose");
             var originopt = document.getElementById("optorigin");
+            var regionint = document.getElementById("tregion");
+            var originint = document.getElementById("torigin");
+            var resortint = document.getElementById("toresort");
+            var parkingint = document.getElementById("toparking");
+            var purposeint = document.getElementById("topurpose");
             
+                //functions for optional input fields and redirects
             function disagree() {
                 window.location.href="index.html";
             }
@@ -312,26 +326,30 @@
             function countrycheck() {
                 var countryselect = document.getElementById("tcountry").value;
                 if (countryselect == "International") {
-                originopt.value="";
                 originopt.style.display = "block"; 
                 regionopt.style.display = "none";
-                } else if (countryselect == "Philippines"){
-                originopt.value = "N/A";
+                $('#tregion').prop('selectedIndex', 18);
+                originint.value= "";    
+                } 
+    
+                else {
                 originopt.style.display = "none";
                 regionopt.style.display = "block";
+                $('#tregion').prop('selectedIndex', 0);
+                originint.value = "NONE";
                 }
             }
-    
+         
             function resortcheck() {
                 var resortselect = document.getElementById("tresort").value;
                 if (resortselect == "Other") {
                 resortopt.style.display = "block"; 
-                resortopt.value= "";    
+                resortint.value= "";    
                 } 
     
                 else {
                 resortopt.style.display = "none";
-                resortopt.value = "N/A";
+                resortint.value = "NONE";
                 }
             }
     
@@ -340,12 +358,12 @@
     
                 if (parkselect == "Other") {
                 parkingopt.style.display = "block"; 
-                parkingopt.value = "";    
+                parkingint.value = "";    
                 } 
     
                 else {
                 parkingopt.style.display = "none";
-                parkingopt.value = "N/A";
+                parkingint.value = "NONE";
                 }
             }
     
@@ -353,19 +371,15 @@
                 var purposeselect = document.getElementById("tpurpose").value;
                 if (purposeselect == "Other") {
                 purposeopt.style.display = "block"; 
-                purposeopt.value = "";    
+                purposeint.value = "";    
                 } 
     
                 else {
                 purposeopt.style.display = "none";
-                purposeopt.value = "N/A";
+                purposeint.value = "NONE";
                 }
             }
 
-            $(document).ready(function() {
-                $('#consentm').modal('show');
-            });
-             
             </script>
          
 </html>

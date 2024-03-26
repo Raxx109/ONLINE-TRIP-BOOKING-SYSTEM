@@ -1,9 +1,12 @@
 html {
     text-family: sans-serif;
     text-align: justify;
-    font-size: 12px;
+    font-size: 0.69rem;
 }
 
+input {
+    font-size: 1vm;
+}
 label {
     font-weight: 500;
 }
