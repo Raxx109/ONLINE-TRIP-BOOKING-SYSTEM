@@ -43,7 +43,7 @@ body {
     width: 100%;
     overflow: hidden;
     transition: all 0.35s ease-in-out;
-    background-color: #fafbfe;
+    background-color: #F5F7FA;
 }
 
 #sidebar {
@@ -53,7 +53,7 @@ body {
     transition: all .25s ease-in-out;
     display: flex;
     flex-direction: column;
-    background-color: var(--primary);
+    background-color: #ECF0F1;
 }
 
 #sidebar.expand {
@@ -78,7 +78,7 @@ body {
 }
 
 .sidebar-logo a {
-    color: #FFF;
+    color: black;
     font-size: 1.15rem;
     font-weight: 600;
 }
@@ -95,6 +95,7 @@ body {
 #sbox {
     margin-left: 1rem;
 }
+/*
 .form-floating>.form-control,
 .form-floating>.form-control-plaintext {
   padding: 0rem 0.75rem !important;
@@ -111,6 +112,43 @@ body {
 .form-floating>label {
   font-size: 0.57rem;
   padding: 0.47rem 1.33rem !important;
+}
+*/
+
+table.table-fit {
+    width: auto !important;
+    table-layout: auto !important;
+  }
+  table.table-fit thead th,
+  table.table-fit tbody td,
+  table.table-fit tfoot th,
+  table.table-fit tfoot td {
+    width: auto !important;
+  }
+
+.table td.fit, 
+.table th.fit {
+   white-space: nowrap;
+   width: 1%;
+}
+
+#table {
+	margin :0 0 0;
+	margin-top: 10px;
+	border-style: none;
+    font-size: 0.6rem;
+}
+#thead {
+    margin: 0 0 0;
+	position: sticky;
+	table-layout: auto;
+	background-color: #28a745;
+	color: white;
+	text-align: center;
+	top: 0;
+}
+#tbody {
+	background-color: white;
 }
 
 .sidebar-nav {
@@ -134,7 +172,7 @@ a.sidebar-link {
 
 a.sidebar-link:hover {
     background-color: rgba(255, 255, 255, .075);
-    color:var(--secondary);
+    color:var(--primary);
     border-left: 3px solid #3b7ddd;
 }
 

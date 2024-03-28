@@ -1,7 +1,25 @@
 
 <?php 
 session_start();
+$dbc = require_once 'config.php';
+
 $admin = 'testadmin';
+
+
+if(isset($_GET['TouristID'])) {
+    try {
+        $tid = $_GET['TouristID'];
+        $sqldelcmd = "DELETE FROM `tourist_info` WHERE `TouristID` = :tid";
+        $stmtdel = $dbc->prepare($sqldelcmd);
+        $stmtdel -> bindValue(':tid', $tid);
+        $stmtdel -> execute();
+        $sqldelcmd = null;
+        $stmtdel = null;
+    } catch(Exception $d){
+        echo '<script>window.alert("DELETE FAILED!")</script>';
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -105,7 +123,7 @@ $admin = 'testadmin';
                 </li>
             </ul>
             <div class="sidebar-footer">
-                <a href="#" class="sidebar-link">
+                <a href="login.php" class="sidebar-link">
                     <i class="lni lni-exit"></i>
                     <span>Logout</span>
                 </a>
@@ -115,9 +133,8 @@ $admin = 'testadmin';
             <div class="text-center">
                 <div class="row">
                 <nav class="navbar bg-light" style="height:50px;">
-                    <div class="form-floating col-2">
-                    <input type="text" class="form-control" id="sbox" name="searchbox" placeholder="query"/> 
-                    <label for="sbox">SEARCH</label>
+                    <div class="form-group col-2">
+                    <input type="text" class="form-control form-control-sm" id="sbox" name="searchbox" placeholder="Search"/> 
                     </div>
                     <div class="col-2">
                         Messages
@@ -133,97 +150,104 @@ $admin = 'testadmin';
 			<div class="row">
 				<div class="col-md-12">
 					<div class="mt-5 mb-3 clearfix">
-					<a href = "penrolllogin.php" class = "btn btn-danger pull-left" id = "logout">LOG-OUT</a>
-					<h2 class="mt-5 mb-3 clearfix" id = "title" align="center" >ADMIN DASHBOARD</h2><a href = "penrollcreate.php" class = "btn btn-success" id = "addbutton"><i>+</i> ADD STUDENT</a>
 					</div>
 					<?php
-					require_once "penrollconfig.php";
 					
-					$sql = "SELECT * FROM tourist_info";
-					if($result = $dbc->query($sql)){
-						if(mysqli_num_rows($result) > 0) {
-							echo '<table class="table table-bordered table=striped table-responsive" id = "table">';
-								echo "<thead class = 'table table-info' id = 'thead'>";
+					$sqlcmd = "SELECT * FROM tourist_info ORDER BY Arrivaldate ASC";
+                    $stmt = $dbc->prepare($sqlcmd);
+                    $stmt->execute();
+					if($result = $dbc->query($sqlcmd)){
+                        $count = $result->rowCount();
+						if($count > 0) {
+							echo '<div class = "table-responsive w-auto" style="width:100%; height:100%;"><table class="table table-bordered table=striped w-auto" id = "table">';
+								echo "<thead class = 'table table w-auto' id = 'thead'>";
 									echo "<tr>";
-										echo "<th>STUDENT NUMBER</th>";
-										echo "<th>STUDENT NAME</th>";
-										echo "<th>COURSE/YEAR</th>";
-										echo "<th>SCHOOLYEAR</th>";
-										echo "<th>SEMESTER</th>";
-										echo "<th>PREENROLLMENT</th>";
-										echo "<th>STATUS</th>";
-										echo "<th>PAYMENT</th>";
-										echo "<th>       ACTION</th>";
+                                        echo "<th>       ACTION</th>";
+                                        echo "<th>NO.</th>";
+                                        echo "<th>STATUS</th>";
+                                        echo "<th>EMAIL</th>";
+                                        echo "<th>NAME</th>";
+                                        echo "<th>CONTACT</th>";
+                                        echo "<th>COR</th>";
+                                        //echo "<th>O.COR</th>";
+                                        echo "<th>REGION</th>";
+                                        //echo "<th>FRGN#</th>";
+                                        //echo "<th>FP#</th>";
+                                        //echo "<th>M#</th>";
+                                        echo "<th>ΣV</th>";
+                                        //echo "<th>ΣM</th>";
+                                        //echo "<th>ΣF</th>";
+                                        //echo "<th>ΣS</th>";
+                                        //echo "<th>Σ7+</th>";
+                                        //echo "<th>Σ59+</th>";
+                                        //echo "<th>Σ60+</th>";
+                                        echo "<th>A.DATE</th>";
+                                        echo "<th>ITIR</th>";
+                                        echo "<th>RESORT</th>";
+                                       // echo "<th>O.RESORT</th>";
+                                        echo "<th>T.MEANS</th>";
+                                        echo "<th>PARKING</th>";
+                                        //echo "<th>O.PRKG</th>";
+                                        echo "<th>BOAT</th>";
+                                        echo "<th>PURPOSE</th>";
+                                        //echo "<th>O.PURPOSE</th>";
 									echo "</tr>";
 								echo "</thead>";
-								echo "<tbody class = 'table table-dark''>";
-								while($row = mysqli_fetch_array($result)){
+								echo "<tbody class = 'table w-auto'>";
+								while($data = $stmt->FETCH(PDO::FETCH_ASSOC)){
 									echo "<tr>";
-										echo "<td>" . $row['student_number'] . "</td>";
-										echo "<td>" . $row['student_name'] . "</td>";
-										echo "<td>" . $row['course_year'] . "</td>";
-										echo "<td>" . $row['school_year'] . "</td>";
-										echo "<td>" . $row['semester'] . "</td>";
-										echo "<td>" . $row['preenrollment'] . "</td>";
-										echo "<td>" . $row['status'] . "</td>";
-										echo "<td>" . $row['payment'] . "</td>";
-										echo "<td>";
-											echo '<a href="penrollsetsubject.php?student_number=' . $row['student_number'] . '" class = "mr-3" title = "Set Subjects" data-toggle="tooltip" style="text-decoration: none;"><span class="viewicon">   📚  </span></a>';
-											echo '<a href="penrollupdate.php?student_number=' . $row['student_number'] . '" class = "mr-3" title = "Update Student Info" data-toggle="tooltip" style="text-decoration: none; color: green;><span class="updateicon">📝  </span></a>';
-											echo '<a href="penrolldelete.php?student_number=' . $row['student_number'] . '" class = "mr-3" title = "Delete Student Info" data-toggle="tooltip" style="text-decoration: none; color: red;><span class="deleteicon">☒</span></a>';
-										echo "</td>";
+                                   echo "<td>";
+                                   // echo '<a href="viewrecord.php?TouristID=' . $data['TouristID'] . '" class = "mr-3" title = "View Record" data-toggle="tooltip" style="text-decoration: none;"><span class="viewicon">📚  </span></a>';
+                                   // echo '<a href="updaterecord.php?TouristID=' . $data['TouristID'] . '" class = "mr-3" title = "Update Tourist Info" data-toggle="tooltip" style="text-decoration: none; color: green;><span class="updateicon">📝  </span></a>';
+                                   echo '<form action = "dashboard.php" name="Delete" method ="GET"><input type = hidden name = "TouristID" value = "'. $data['TouristID'].'"></input> <button type = "submit" class = "mr-3" title = "Delete Tourist Info" data-toggle="tooltip" style="text-decoration: none; color: red;"><span class="deleteicon">🗑</span></button></form>';
+                                echo "</td>";
+                                        echo "<td>" . $data['TouristID'] . "</td>";
+                                        echo "<td>" . $data['Status'] . "</td>";
+                                        echo "<td>" . $data['Email'] . "</td>";
+                                        echo "<td>" . $data['Fullname'] . "</td>";
+                                        echo "<td>" . $data['Contactno'] . "</td>";
+                                        echo "<td>" . $data['Residence'] . "</td>";
+                                        //echo "<td>" . $data['Country'] . "</td>";
+                                        echo "<td>" . $data['Region'] . "</td>";
+                                        //echo "<td>" . $data['Foreignerc'] . "</td>";
+                                        //echo "<td>" . $data['Filipinoc'] . "</td>";
+                                        //echo "<td>" . $data['Maubaninc'] . "</td>";
+                                        echo "<td>" . $data['TotalV'] . "</td>";
+                                        //echo "<td>" . $data['TotalM'] . "</td>";
+                                        //echo "<td>" . $data['TotalF'] . "</td>";
+                                        //echo "<td>" . $data['TotalS'] . "</td>";
+                                        //echo "<td>" . $data['Sevenyold'] . "</td>";
+                                        //echo "<td>" . $data['Fifnineyold'] . "</td>";
+                                        //echo "<td>" . $data['Sixtyold'] . "</td>";
+                                        echo "<td>" . $data['Arrivaldate'] = date('m-d', strtotime($data["Arrivaldate"])) . "</td>";
+                                        echo "<td>" . $data['Itinerary'] . "</td>";
+                                        echo "<td>" . $data['Resort'] . "</td>";
+                                        //echo "<td>" . $data['Resortopt'] . "</td>";
+                                        echo "<td>" . $data['Travelmeans'] . "</td>";
+                                        echo "<td>" . $data['Parking'] . "</td>";
+                                        //echo "<td>" . $data['Parkingopt'] . "</td>";
+                                        echo "<td>" . $data['Boating'] . "</td>";
+                                        echo "<td>" . $data['Purpose'] . "</td>";
+                                        //echo "<td>" . $data['Purposeopt'] . "</td>";
 									echo "</tr>";
 								}
 								echo "</tbody>";
-							echo "</table>";
-							mysqli_free_result($result);
+							echo "</table> </div>";
 						}
 						else {
-							echo '<div class ="alert alert-danger"><b>NO STUDENTS HAVE PRE-ENROLLED.</b></div>';
+							echo '<div class ="alert alert-danger"><b>NO CLIENTS FOUND</b></div>';
 						}
 						}
 					else {
-						echo "Oops! Something wnet wrong. Please try again later.";
+						echo "Oops! Something went wrong. Please try again later.";
 					}
-					mysqli_close($link);
+                    $sqlcmd = null;
+                    $dbc = null;
 					?>
                 </div>
             </div>
         </div>
     </div>
-
-    <!--
-    <div class="container-fluid">
-
-        <div class="d-flex spinner-border text-warning" role="status">
-            <span class="sr-only"></span>
-        </div>
-
-        <div class="sbar">
-            <nav class="navbar bg-light navbar-light">
-                <a href="dashboard.php" class="navbar-brand" >
-                <img src="../img/logo/macto.png" style="display: flex;  width: 5rem" /> <h3 style="display:flex; margin-top:-3.5rem; margin-left:5rem">MACTO</h3>
-                </a>
-                <div class="row align-items-center mb-4 ms-4">
-                    <div class="position-relative">
-                        <img class="rounded-circle" src="../img/admin/user/testadmin.jpg" alt="" style = "height:40px; width:40px;"/>
-                    </div>
-                    <div class="ms-5">
-                        <h6 style="margin-bottom: 0px;"><?php //if(!empty ($admin)){echo $admin;} ?></h6>
-                        <span>Admin</span>
-                    </div>
-                </div>
-                    <div class="navbar-nav">
-                        <a href="dashboard.php">Dashboard</a>
-                    </div>
-            </nav>
-        </div>
-
-        <div class="content">
-
-        </div>
-    </div>
--->
     <script type="text/javascript"> 
     
     const hamBurger = document.querySelector(".toggle-btn");
@@ -238,3 +262,4 @@ $admin = 'testadmin';
          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> -->
 </body>
 </html>
+

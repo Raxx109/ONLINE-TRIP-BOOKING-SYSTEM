@@ -32,13 +32,16 @@ $dbc = require_once 'config.php';
         $purposeopt = $_POST['opurpose'];
         $pending = 'Pending';
       
-        $sqlcmd = "INSERT INTO `tourist_info` (`TouristID`, `Email`, `Fullname`, `Contactno`, `Residence`, `Country`, `Region`, `Foreignerc`, `Filipinoc`, `Maubaninc`, `TotalV`, `TotalM`, `TotalF`, `TotalS`, `Sevenyold`, `Fifnineyold`, `Sixtyold`, `Arrivaldate`, `Itinerary`, `Resort`, `Resortopt`, `Travelmeans`, `Parking`, `Parkingopt`, `Boating`, `Purpose`, `Purposeopt`, `Status`) VALUES (NULL, :email, :fulln, :contact, :residence, :country, :region, :fc, :fpc, :mc, :tv, :tm, :tf, :ts, :sevyold, :fifyold, :sixtyold, :adate, :itr, :resort, :resortopt, :tmeans, :parking, :parkingopt, :boating, :purpose, :purposeopt, :sts)";
+        $sqlcmd = "INSERT INTO `tourist_info` (`TouristID`, `Email`, `Fullname`, `Contactno`, `Residence`, `Region`, `Foreignerc`, `Filipinoc`, `Maubaninc`, `TotalV`, `TotalM`, `TotalF`, `TotalS`, `Sevenyold`, `Fifnineyold`, `Sixtyold`, `Arrivaldate`, `Itinerary`, `Resort`, `Travelmeans`, `Parking`, `Boating`, `Purpose`, `Status`) VALUES (NULL, :email, :fulln, :contact, :residence, :region, :fc, :fpc, :mc, :tv, :tm, :tf, :ts, :sevyold, :fifyold, :sixtyold, :adate, :itr, :resort, :tmeans, :parking, :boating, :purpose, :sts)";
         $stmt = $dbc -> prepare($sqlcmd);
         $stmt -> bindValue(':email', $email); 
         $stmt -> bindValue(':fulln', $fname);
         $stmt -> bindValue(':contact', $contact);
-        $stmt -> bindValue(':residence', $residence);
-        $stmt -> bindValue(':country', $country);
+        if ($residence == "International") {
+            $stmt -> bindValue(':residence', $country);
+        } else {
+            $stmt -> bindValue(':residence', $residence);
+        }
         $stmt -> bindValue(':region', $region); 
         $stmt -> bindValue(':fc', $fc);
         $stmt -> bindValue(':fpc', $fpc);
@@ -52,14 +55,21 @@ $dbc = require_once 'config.php';
         $stmt -> bindValue(':sixtyold', $sixtyold); 
         $stmt -> bindValue(':adate', $adate);
         $stmt -> bindValue(':itr', $itr);
-        $stmt -> bindValue(':resort', $resort);
-        $stmt -> bindValue(':resortopt', $resortopt); 
-        $stmt -> bindValue(':tmeans', $tmeans);
-        $stmt -> bindValue(':parking', $parking);
-        $stmt -> bindValue(':parkingopt', $parkingopt);
+        if ($resort == "O") {
+            $stmt -> bindValue(':resort', $resortopt); 
+        } else {
+            $stmt -> bindValue(':resort', $resort);
+        }
+            $stmt -> bindValue(':tmeans', $tmeans);
+        if ($parking == "O") {
+            $stmt -> bindValue(':parking', $parkingopt);
+        } else {$stmt -> bindValue(':parking', $parking);
+        }
         $stmt -> bindValue(':boating', $boating);
-        $stmt -> bindValue(':purpose', $purpose);
-        $stmt -> bindValue(':purposeopt', $purposeopt);
+        if ($purpose == "O") {
+            $stmt -> bindValue(':purpose', $purposeopt);
+        } else {$stmt -> bindValue(':purpose', $purpose);
+        }
         $stmt -> bindValue(':sts', $pending);
         $stmt -> execute();
         $dbc = null;
@@ -67,9 +77,9 @@ $dbc = require_once 'config.php';
         $stmt = null;
         header('location:submit.php');
         } catch (Exception $e ){
-            echo '<script>window.alert("INSERT FAIL!")</script>';
+            echo '<script>window.alert("APPLICATION FAILED!")</script>';
         }
-        } 
+        }
         
 ?>
 
@@ -130,7 +140,7 @@ $dbc = require_once 'config.php';
                         </div>
                         
                     </div>
-                            <form name="AppForm" id="Rform" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST" novalidate>
+                            <form name="AppForm" id="Rform" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" novalidate>
                     <div class="row">
                         <h5>Tourist Information</h5>
                             <div class ="form-floating col">
@@ -139,7 +149,7 @@ $dbc = require_once 'config.php';
                                 <span id="temailfail"></span>
                             </div>
                             <div class ="form-floating col">
-                               <input type = "text" name = "fullname" id="tfname" class="form-control" placeholder = "John Doe" pattern="([A-zÀ-ž\s]){2,} ([A-zÀ-ž\s]){2,}" required />
+                               <input type = "text" name = "fullname" id="tfname" class="form-control" placeholder = "John Doe" pattern="([A-zÀ-ž.\s]){2,} ([A-zÀ-ž.\s]){2,}" required />
                                 <label for="tfname">&nbsp;&nbsp; Full Name</label>
                                 <span id="tfnamefail"></span>
                             </div>
@@ -185,7 +195,7 @@ $dbc = require_once 'config.php';
                                 <option value="NCR">NCR - National Capital Region</option>
                                 <option value="CAR">CAR - Cordillera Administrative Region</option>
                                 <option value="BARMM">BARMM-Bangsamoro Autonomous Region in Muslim Mindanao</option>
-                                <option value="NONE" disabled hidden>NONE</option>
+                                <option value="N/A" hidden>N/A</option>
                             </select>
                             <label for="tregion">&nbsp;&nbsp; Region</label>
                         </div>
@@ -424,6 +434,7 @@ $dbc = require_once 'config.php';
                 originopt.style.display = "block"; 
                 regionopt.style.display = "none";
                 $('#tregion').prop('selectedIndex', 18);
+                $('#tregion').attr('value', 'N/A');
                 originint.value= "";    
                 } 
     
