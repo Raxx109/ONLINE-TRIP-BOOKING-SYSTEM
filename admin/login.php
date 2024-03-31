@@ -13,6 +13,7 @@ $dbc = require_once "config.php";
            }  
            else  
            {  
+                $user = $_POST["username"];
                 $sqlcmd = "SELECT * FROM login_info WHERE Username = :username AND Password = :password";  
                 $stmt = $dbc->prepare($sqlcmd);  
                 $stmt->execute(  

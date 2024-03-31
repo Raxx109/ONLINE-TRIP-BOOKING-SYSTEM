@@ -30,14 +30,14 @@ $dbc = require_once 'config.php';
         $boating = $_POST['boat']; 
         $purpose = $_POST['purpose']; 
         $purposeopt = $_POST['opurpose'];
-        $pending = 'Pending';
+        $status = 'Pending';
       
         $sqlcmd = "INSERT INTO `tourist_info` (`TouristID`, `Email`, `Fullname`, `Contactno`, `Residence`, `Region`, `Foreignerc`, `Filipinoc`, `Maubaninc`, `TotalV`, `TotalM`, `TotalF`, `TotalS`, `Sevenyold`, `Fifnineyold`, `Sixtyold`, `Arrivaldate`, `Itinerary`, `Resort`, `Travelmeans`, `Parking`, `Boating`, `Purpose`, `Status`) VALUES (NULL, :email, :fulln, :contact, :residence, :region, :fc, :fpc, :mc, :tv, :tm, :tf, :ts, :sevyold, :fifyold, :sixtyold, :adate, :itr, :resort, :tmeans, :parking, :boating, :purpose, :sts)";
         $stmt = $dbc -> prepare($sqlcmd);
         $stmt -> bindValue(':email', $email); 
         $stmt -> bindValue(':fulln', $fname);
         $stmt -> bindValue(':contact', $contact);
-        if ($residence == "International") {
+        if ($residence == "INT") {
             $stmt -> bindValue(':residence', $country);
         } else {
             $stmt -> bindValue(':residence', $residence);
@@ -70,7 +70,7 @@ $dbc = require_once 'config.php';
             $stmt -> bindValue(':purpose', $purposeopt);
         } else {$stmt -> bindValue(':purpose', $purpose);
         }
-        $stmt -> bindValue(':sts', $pending);
+        $stmt -> bindValue(':sts', $status);
         $stmt -> execute();
         $dbc = null;
         $sqlcmd = null;
@@ -165,8 +165,8 @@ $dbc = require_once 'config.php';
                         <div class ="form-floating col">
                             <select name = "country" id="tcountry" class="form-control" onchange = "countrycheck()" required> 
                                 <option value="" disabled selected>Select Country of Residence</option>
-                                <option value="Philippines">Philippines</option>
-                                <option value="International">International</option>
+                                <option value="PH">Philippines</option>
+                                <option value="INT">International</option>
                             </select>
                             <label for="tcountry">&nbsp;&nbsp; Country of Residence</label>
                         </div>
@@ -430,7 +430,7 @@ $dbc = require_once 'config.php';
 
             function countrycheck() {
                 var countryselect = document.getElementById("tcountry").value;
-                if (countryselect == "International") {
+                if (countryselect == "INT") {
                 originopt.style.display = "block"; 
                 regionopt.style.display = "none";
                 $('#tregion').prop('selectedIndex', 18);

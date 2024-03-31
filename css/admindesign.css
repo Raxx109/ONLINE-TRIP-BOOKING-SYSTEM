@@ -95,7 +95,8 @@ body {
 #sbox {
     margin-left: 1rem;
 }
-/*
+
+/* floating labels css 
 .form-floating>.form-control,
 .form-floating>.form-control-plaintext {
   padding: 0rem 0.75rem !important;
@@ -115,6 +116,29 @@ body {
 }
 */
 
+.navbar {
+    background-color: #ECF0F1;
+}
+
+.dbinfo {
+    display:block;
+}
+.updform {
+    display: none;
+    height: 0.25rem;
+    font-size: 0.6rem;
+}
+.actbtn {
+    width: 0.25rem;
+    padding: 0;
+    border: none;
+    background: none;
+}
+
+.vtable {
+    font-size: 0.5rem;
+    text-align: center;
+}
 table.table-fit {
     width: auto !important;
     table-layout: auto !important;
@@ -142,7 +166,7 @@ table.table-fit {
     margin: 0 0 0;
 	position: sticky;
 	table-layout: auto;
-	background-color: #28a745;
+	background-color: var(--primary);
 	color: white;
 	text-align: center;
 	top: 0;
