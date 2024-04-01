@@ -3,7 +3,7 @@
 session_start();
 $dbc = require_once 'config.php';
 
-if (empty($_SESSION['username']) && empty($_SESSION['password'])) {
+if (empty($_SESSION['username'])) {
     header("location:./login.php");
 } 
 else {
@@ -21,156 +21,6 @@ try {
     $admin = '404 ADMIN';
 }
 }
-
-
- //add buttons for each function
-if(isset($_POST['stsbtn'])) {
-
-    if ($_POST['stsbtn'] == 1){
-        try {
-            $tid = $_POST['TouristID'];
-            $sqlrescmd = "UPDATE `tourist_info` SET `status` = 'Pending' WHERE `TouristID` = :tid";
-            $stmtres = $dbc->prepare($sqlrescmd);
-            $stmtres -> bindValue(':tid', $tid);
-            $stmtres -> execute();
-            $sqlrescmd = null;
-            $stmtres = null;
-            } catch(Exception $d){
-                echo '<script>window.alert("RESET FAILED!")</script>';
-            }
-        }
-
-    if ($_POST['stsbtn'] == 0){
-    try {
-        $tid = $_POST['TouristID'];
-        $sqldnycmd = "UPDATE `tourist_info` SET `status` = 'Denied' WHERE `TouristID` = :tid";
-        $stmtdny = $dbc->prepare($sqldnycmd);
-        $stmtdny -> bindValue(':tid', $tid);
-        $stmtdny -> execute();
-        $sqldnycmd = null;
-        $stmtdny = null;
-        } catch(Exception $d){
-            echo '<script>window.alert("APPROVAL FAILED!")</script>';
-        }
-    }
-
-    if ($_POST['stsbtn'] == 2){
-    //Approve status
-    try {
-        $tid = $_POST['TouristID'];
-        $sqlapvcmd = "UPDATE `tourist_info` SET `status` = 'Approved' WHERE `TouristID` = :tid";
-        $stmtapv = $dbc->prepare($sqlapvcmd);
-        $stmtapv -> bindValue(':tid', $tid);
-        $stmtapv -> execute();
-        $sqlapvcmd = null;
-        $stmtapv = null;
-        } catch(Exception $d){
-            echo '<script>window.alert("APPROVAL FAILED!")</script>';
-        }
-    }
-
-        }
-
-        if (isset($_POST['delbtn'])){
-            //Approve status
-           
-            //Delete Function
-            try {
-                $tid = $_POST['TouristID'];
-                $sqldelcmd = "DELETE FROM `tourist_info` WHERE `TouristID` = :tid";
-                $stmtdel = $dbc->prepare($sqldelcmd);
-                $stmtdel -> bindValue(':tid', $tid);
-                $stmtdel -> execute();
-                $sqldelcmd = null;
-                $stmtdel = null;
-                } catch(Exception $d){
-                    echo '<script>window.alert("DELETE FAILED!")</script>';
-                }
-            
-            }
-
-        if (isset($_POST['updbtn'])){
-            //Update Function
-            try {
-                $email = $_POST['email'];
-                $fname = $_POST['fullname']; 
-                $contact = $_POST['contactno']; 
-                $residence = $_POST['country']; 
-                //$country = $_POST['origin']; 
-                $region = $_POST['region']; 
-                $fc = $_POST['foreignc']; 
-                $fpc = $_POST['filipinoc']; 
-                $mc = $_POST['maubaninc']; 
-                $tv = $_POST['visitorc']; 
-                $tm = $_POST['malec']; 
-                $tf = $_POST['femalec']; 
-                $ts = $_POST['specialc']; 
-                $sevyold = $_POST['sevenyoc']; 
-                $fifyold = $_POST['fifnineyoc']; 
-                $sixtyold = $_POST['sixtyyoc']; 
-                $adate = $_POST['traveldate']; 
-                $itr = $_POST['itinerary']; 
-                $resort = $_POST['resort']; 
-                //$resortopt = $_POST['oresort']; 
-                $tmeans = $_POST['travelmeans']; 
-                $parking = $_POST['parking']; 
-                //$parkingopt = $_POST['oparking']; 
-                $boating = $_POST['boat']; 
-                $purpose = $_POST['purpose']; 
-                //$purposeopt = $_POST['opurpose'];
-                $status = $_POST['status'];
-                $tid = $_POST['TouristID'];
-                
-                $sqlupdcmd = "UPDATE `tourist_info` SET `Email` = :email, `Fullname` = :fulln, `Contactno` = :contact, `Residence` = :residence, `Region` = :region, `Foreignerc` = :fc, `Filipinoc` = :fpc, `Maubaninc` = :mc, `TotalV` = :tv, `TotalM` = :tm, `TotalF` = :tf, `TotalS` = :ts, `Sevenyold` = :sevyold, `Fifnineyold` = :fifyold, `Sixtyold` = :sixtyold, `Arrivaldate` = :adate, `Itinerary` = :itr, `Resort` = :resort, `Travelmeans` = :tmeans, `Parking` = :parking, `Boating` = :boating, `Purpose` = :purpose, `Status` = :sts WHERE `TouristID` = :tid";
-                $stmtupd = $dbc->prepare($sqlupdcmd);
-                $stmtupd -> bindValue(':email', $email); 
-            $stmtupd -> bindValue(':fulln', $fname);
-            $stmtupd -> bindValue(':contact', $contact);
-            //if ($residence == "INT") {
-                //$stmtupd -> bindValue(':residence', $country);
-            //} else {
-                $stmtupd -> bindValue(':residence', $residence);
-            //}
-            $stmtupd -> bindValue(':region', $region); 
-            $stmtupd -> bindValue(':fc', $fc);
-            $stmtupd -> bindValue(':fpc', $fpc);
-            $stmtupd -> bindValue(':mc', $mc);
-            $stmtupd -> bindValue(':tv', $tv); 
-            $stmtupd -> bindValue(':tm', $tm);
-            $stmtupd -> bindValue(':tf', $tf);
-            $stmtupd -> bindValue(':ts', $ts);
-            $stmtupd -> bindValue(':sevyold', $sevyold);
-            $stmtupd -> bindValue(':fifyold', $fifyold);
-            $stmtupd -> bindValue(':sixtyold', $sixtyold); 
-            $stmtupd -> bindValue(':adate', $adate);
-            $stmtupd -> bindValue(':itr', $itr);
-            //if ($resort == "O") {
-                //$stmtupd -> bindValue(':resort', $resortopt); 
-           // } else {
-                $stmtupd -> bindValue(':resort', $resort);
-            //}
-                $stmtupd -> bindValue(':tmeans', $tmeans);
-            //if ($parking == "O") {
-                //$stmtupd -> bindValue(':parking', $parkingopt);
-            //} else {
-                $stmtupd -> bindValue(':parking', $parking);
-            //}
-            $stmtupd -> bindValue(':boating', $boating);
-           // if ($purpose == "O") {
-                //$stmtupd -> bindValue(':purpose', $purposeopt);
-            //} else {
-                $stmtupd -> bindValue(':purpose', $purpose);
-           // }
-            $stmtupd -> bindValue(':sts', $status);
-                $stmtupd -> bindValue(':tid', $tid);
-                $stmtupd -> execute();
-                $sqlupdcmd = null;
-                $stmtupd = null;
-                echo '<script>window.alert("UPDATED APPLICATION NO. ' . $tid .' !")</script>';
-                } catch(Exception $d){
-                    echo '<script>window.alert("UPDATE FAILED!")</script>';
-                }
-            }
     
 ?>
 
@@ -212,7 +62,7 @@ if(isset($_POST['stsbtn'])) {
                         </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
+                    <a href="dashboard.php" class="sidebar-link">
                         <i class="lni lni-agenda"></i>
                         <span>Status</span>
                     </a>
@@ -285,46 +135,13 @@ if(isset($_POST['stsbtn'])) {
             <div class="text-center">
                 <div class="row">
                 <nav class="navbar">
-                <div class="form-group col-1">
-                <form action = "<?php echo HTMLSPECIALCHARS($_SERVER['PHP_SELF']); ?>" method = "POST">
-                    <select name = 'category' class = 'form-control-sm'>
-                        <option value = "Email">Email</option>
-                        <option value = "Fullname">Full Name</option>
-                        <option value = "Contactno">Contact No.</option>
-                        <option value = "Residence">Country</option>
-                        <option value = "Region">Region</option>
-                        <option value = "Foreignerc">#Foreigner</option>
-                        <option value = "Filipinoc">#Filipino</option>
-                        <option value = "Maubaninc">#Maubanin</option>
-                        <option value = "TotalV">#Visitor</option>
-                        <option value = "TotalM">#Male</option>
-                        <option value = "TotalF">#Female</option>
-                        <option value = "TotalS">#Special</option>
-                        <option value = "Sevenyold">0-7 Y/OLD</option>
-                        <option value = "Fifnineyold">13 - 59 Y/OLD</option>
-                        <option value = "Sixtyold">60+ Y/OLD</option>
-                        <option value = "Arrivaldate">Arrival Date</option>
-                        <option value = "Itinerary">Itinerary</option>
-                        <option value = "Resort">Resort</option>
-                        <option value = "Travelmeans">Travel Means</option>
-                        <option value = "Parking">Parking</option>
-                        <option value = "Boating">Boating</option>
-                        <option value = "Purpose">Purpose</option>
-                        <option value = "Status">Status</option>
-                    </select>
+                    <div class="form-group col-3">
+                    <input type="text" class="form-control form-control-sm" id="sbox" name="searchbox" placeholder="Search"/> 
                     </div>
-                    <div class="form-group col-2">
-                    <input type="search" class="form-control form-control-sm" id="sbox" name="searchbox" placeholder="Search" style= "margin-left: 2.5rem;" /> 
-                    </div>
-                    <div class="form-group col-2">
-                    <button type = "submit" name = "srchbtn" class = "btn btn-success" style= "margin-left: 0.7rem;" >SEARCH</button>
-                    </form>
-                    </div>
-      
-                    <div class="col">
+                    <div class="col-5">
                         Ratings
                     </div>
-                    <div class="col">
+                    <div class="col-4">
                         Notifications
                     </div>
                 </nav>
@@ -334,26 +151,17 @@ if(isset($_POST['stsbtn'])) {
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-12">
-					<div class="mb-3 clearfix">
+					<div class="mt-5 mb-3 clearfix">
 					</div>
 					<?php
-					try {
-                    if (isset($_POST['srchbtn'])){
-                        $crit = $_POST['category'];
-                        $qry = $_POST['searchbox'];
-                    } 
-                    else {
-                        $crit = 1; 
-                        $qry = 1;
-                    }
-
-					$sqlcmd = "SELECT * FROM tourist_info WHERE $crit LIKE '%$qry%' ORDER BY Status DESC, ArrivalDate ASC";
+					
+					$sqlcmd = "SELECT * FROM tourist_info ORDER BY Arrivaldate ASC";
                     $stmt = $dbc->prepare($sqlcmd);
                     $stmt->execute();
 					if($result = $dbc->query($sqlcmd)){
                         $count = $result->rowCount();
 						if($count > 0) {
-							echo '<div class = "table-responsive w-auto" style="width:100%; height:82%;"><table class="table table-bordered table=striped w-auto" id = "table">';
+							echo '<div class = "table-responsive w-auto" style="width:100%; height:100%;"><table class="table table-bordered table=striped w-auto" id = "table">';
 								echo "<thead class = 'table table w-auto' id = 'thead'>";
 									echo "<tr>";
                                         echo "<th>ACTION</th>";
@@ -365,16 +173,16 @@ if(isset($_POST['stsbtn'])) {
                                         echo "<th>COR</th>";
                                         //echo "<th>O.COR</th>";
                                         echo "<th>REGION</th>";
-                                        echo "<th><button type = 'button' id = 'cbtn' onclick = 'cheadtoggle()'>ΣV</button></th>";
-                                        echo "<th class = 'chead'>FC</th>";
-                                        echo "<th class = 'chead'>FP</th>";
-                                        echo "<th class = 'chead'>MN</th>";
-                                        echo "<th class = 'chead'>M</th>";
-                                        echo "<th class = 'chead'>F</th>";
-                                        echo "<th class = 'chead'>S</th>";
-                                        echo "<th class = 'chead'>7+</th>";
-                                        echo "<th class = 'chead'>59+</th>";
-                                        echo "<th class = 'chead'>60+</th>";
+                                        echo "<th>ΣV</th>";
+                                        echo "<th>F</th>";
+                                        echo "<th>FP</th>";
+                                        echo "<th>MN</th>";
+                                        echo "<th>M</th>";
+                                        echo "<th>F</th>";
+                                        echo "<th>S</th>";
+                                        echo "<th>7+</th>";
+                                        echo "<th>59+</th>";
+                                        echo "<th>60+</th>";
                                         echo "<th>A.DATE</th>";
                                         echo "<th>ITIR</th>";
                                         echo "<th>RESORT</th>";
@@ -429,16 +237,16 @@ if(isset($_POST['stsbtn'])) {
                                         //echo "<td>" . $data['Country'] . "</td>";
                                         echo "<td><span class = 'dbinfo'>" . $data['Region'] . "</span><input type = 'text' value = '". $data['Region'] . "' name = 'region' id='tregion' class='form-control form-control-sm updform' placeholder = 'VII' required /></td>";
                                         echo "<td><span class = 'dbinfo'>" . $data['TotalV'] . "</span><input type = 'number' value = '" . $data['TotalV'] . "' min = '0' name = 'visitorc' id='tvisitorc' class='form-control form-control-sm updform' placeholder = '7' required /></td>";
-                                        echo "<td class = 'chead'><span class = 'dbinfo'>" . $data['Foreignerc'] . "</span><input type = 'number' value = '" . $data['Foreignerc'] . "' min = '0' name = 'foreignc' id='tvisitorc' class='form-control form-control-sm updform' placeholder = '7' required /></td>";
-                                        echo "<td class = 'chead'><span class = 'dbinfo'>" . $data['Filipinoc'] . "</span><input type = 'number' value = '" . $data['Filipinoc'] . "' min = '0' name = 'filipinoc' id='tvisitorc' class='form-control form-control-sm updform' placeholder = '7' required /></td>";
-                                        echo "<td class = 'chead'><span class = 'dbinfo'>" . $data['Maubaninc'] . "</span><input type = 'number' value = '" . $data['Maubaninc'] . "' min = '0' name = 'maubaninc' id='tvisitorc' class='form-control form-control-sm updform' placeholder = '7' required /></td>";
+                                        echo "<td><span class = 'dbinfo'>" . $data['Foreignerc'] . "</span><input type = 'number' value = '" . $data['Foreignerc'] . "' min = '0' name = 'foreignc' id='tvisitorc' class='form-control form-control-sm updform' placeholder = '7' required /></td>";
+                                        echo "<td><span class = 'dbinfo'>" . $data['Filipinoc'] . "</span><input type = 'number' value = '" . $data['Filipinoc'] . "' min = '0' name = 'filipinoc' id='tvisitorc' class='form-control form-control-sm updform' placeholder = '7' required /></td>";
+                                        echo "<td><span class = 'dbinfo'>" . $data['Maubaninc'] . "</span><input type = 'number' value = '" . $data['Maubaninc'] . "' min = '0' name = 'maubaninc' id='tvisitorc' class='form-control form-control-sm updform' placeholder = '7' required /></td>";
 
-                                        echo "<td class = 'chead'><span class = 'dbinfo'>" . $data['TotalM'] . "</span><input type = 'number' value = '" . $data['TotalM'] . "' min = '0' name = 'malec' id='tvisitorc' class='form-control form-control-sm updform' placeholder = '7' required /></td>";
-                                        echo "<td class = 'chead'><span class = 'dbinfo'>" . $data['TotalF'] . "</span><input type = 'number' value = '" . $data['TotalF'] . "' min = '0' name = 'femalec' id='tvisitorc' class='form-control form-control-sm updform' placeholder = '7' required /></td>";
-                                        echo "<td class = 'chead'><span class = 'dbinfo'>" . $data['TotalS'] . "</span><input type = 'number' value = '" . $data['TotalS'] . "' min = '0' name = 'specialc' id='tvisitorc' class='form-control form-control-sm updform' placeholder = '7' required /></td>";
-                                        echo "<td class = 'chead'><span class = 'dbinfo'>" . $data['Sevenyold'] . "</span><input type = 'number' value = '" . $data['Sevenyold'] . "' min = '0' name = 'sevenyoc' id='tvisitorc' class='form-control form-control-sm updform' placeholder = '7' required /></td>";
-                                        echo "<td class = 'chead'><span class = 'dbinfo'>" . $data['Fifnineyold'] . "</span><input type = 'number' value = '" . $data['Fifnineyold'] . "' min = '0' name = 'fifnineyoc' id='tvisitorc' class='form-control form-control-sm updform' placeholder = '7' required /></td>";
-                                        echo "<td class = 'chead'><span class = 'dbinfo'>" . $data['Sixtyold'] . "</span><input type = 'number' value = '" . $data['Sixtyold'] . "' min = '0' name = 'sixtyyoc' id='tvisitorc' class='form-control form-control-sm updform' placeholder = '7' required /></td>";
+                                        echo "<td><span class = 'dbinfo'>" . $data['TotalM'] . "</span><input type = 'number' value = '" . $data['TotalM'] . "' min = '0' name = 'malec' id='tvisitorc' class='form-control form-control-sm updform' placeholder = '7' required /></td>";
+                                        echo "<td><span class = 'dbinfo'>" . $data['TotalF'] . "</span><input type = 'number' value = '" . $data['TotalF'] . "' min = '0' name = 'femalec' id='tvisitorc' class='form-control form-control-sm updform' placeholder = '7' required /></td>";
+                                        echo "<td><span class = 'dbinfo'>" . $data['TotalS'] . "</span><input type = 'number' value = '" . $data['TotalS'] . "' min = '0' name = 'specialc' id='tvisitorc' class='form-control form-control-sm updform' placeholder = '7' required /></td>";
+                                        echo "<td><span class = 'dbinfo'>" . $data['Sevenyold'] . "</span><input type = 'number' value = '" . $data['Sevenyold'] . "' min = '0' name = 'sevenyoc' id='tvisitorc' class='form-control form-control-sm updform' placeholder = '7' required /></td>";
+                                        echo "<td><span class = 'dbinfo'>" . $data['Fifnineyold'] . "</span><input type = 'number' value = '" . $data['Fifnineyold'] . "' min = '0' name = 'fifnineyoc' id='tvisitorc' class='form-control form-control-sm updform' placeholder = '7' required /></td>";
+                                        echo "<td><span class = 'dbinfo'>" . $data['Sixtyold'] . "</span><input type = 'number' value = '" . $data['Sixtyold'] . "' min = '0' name = 'sixtyyoc' id='tvisitorc' class='form-control form-control-sm updform' placeholder = '7' required /></td>";
                                         echo "<td><span class = 'dbinfo'>" . $data['Arrivaldate'] = date('m-d', strtotime($data["Arrivaldate"])) . "</span><input type = 'date' value = '" . $data['Arrivaldate'] . "' name = 'traveldate' id='tdate' class='form-control form-control-sm updform' required/></td>";
                                         echo "<td><span class = 'dbinfo'>" . $data['Itinerary'] . "</span><input type = 'text' value = '". $data['Itinerary'] . "' name = 'itinerary' id='titinerary' class='form-control form-control-sm updform' placeholder = 'ON' required /></td>";
                                         echo "<td><span class = 'dbinfo'>" . $data['Resort'] . "</span><input type = 'text' value = '". $data['Resort'] . "' name = 'resort' id='tresort' class='form-control form-control-sm updform' placeholder = 'Magic Resort' required /></td>";
@@ -463,17 +271,14 @@ if(isset($_POST['stsbtn'])) {
 					}
                     $sqlcmd = null;
                     $dbc = null;
-                } catch (Exception $d) {
-                    echo '<script>window.alert("Fatal Error")</script>';
-                    throw $d;
-                }
 					?>
                 </div>
             </div>
         </div>
     </div>
     <script type="text/javascript"> 
-
+    var chead = document.getElementsByClassName('chead');
+    var c = 0;
     const hamBurger = document.querySelector(".toggle-btn");
 
     hamBurger.addEventListener("click", function () {
@@ -482,23 +287,14 @@ if(isset($_POST['stsbtn'])) {
 
     $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip();   
-    
     });
 
-    function cheadtoggle() {
-            $(".chead").toggle(); 
-    }
 
-    function updtoggle() {
-        $(".dbinfo").toggle();
-        $(".updform").toggle();
-    }
 
+   
 
 </script>
-    <script src="../js/jquery-3.7.1.min.js"></script> 
     <script src=../js/bootstrap.bundle.min.js></script>
-    
     <!-- <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script> 
          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> -->
 </body>

@@ -26,7 +26,7 @@ $dbc = require_once "config.php";
                 if($count > 0)  
                 {  
                      $_SESSION["username"] = $_POST["username"];  
-                     header("location:dashboard.php");  
+                     header("location:home.php");  
                 }  
                 else  
                 {  

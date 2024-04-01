@@ -129,16 +129,36 @@ body {
     font-size: 0.6rem;
 }
 .actbtn {
-    width: 0.25rem;
+    width: 1rem;
+    margin: 0 0 0;
     padding: 0;
     border: none;
     background: none;
+}
+
+#cbtn {
+    border: none;
+    background: none; 
+    color:white; 
+    font-weight: bold;
 }
 
 .vtable {
     font-size: 0.5rem;
     text-align: center;
 }
+
+table.table-bordered{
+    border:1px solid black;
+    margin-top:20px;
+  }
+table.table-bordered > thead > tr > th{
+    border:1px solid black;
+}
+table.table-bordered > tbody > tr > td{
+    border:1px solid black;
+}
+
 table.table-fit {
     width: auto !important;
     table-layout: auto !important;
@@ -156,14 +176,20 @@ table.table-fit {
    width: 1%;
 }
 
+.chead {
+    display: none;
+}
+
 #table {
 	margin :0 0 0;
-	margin-top: 10px;
+    padding: 0;
 	border-style: none;
-    font-size: 0.6rem;
+    font-size: 0.4rem;
+    font-weight: bold;
 }
 #thead {
     margin: 0 0 0;
+    padding: 0;
 	position: sticky;
 	table-layout: auto;
 	background-color: var(--primary);
@@ -171,8 +197,10 @@ table.table-fit {
 	text-align: center;
 	top: 0;
 }
-#tbody {
-	background-color: white;
+tbody {
+    margin: 0 0 0;
+    padding: 0;
+	background-color: #ECF0F1;
 }
 
 .sidebar-nav {
